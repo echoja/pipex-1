@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: heom <heom@student.42.fr>                  +#+  +:+       +#+         #
+#    By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/10 12:51:40 by heom              #+#    #+#              #
-#    Updated: 2021/06/16 13:23:52 by heom             ###   ########.fr        #
+#    Updated: 2021/07/01 13:25:14 by taehokim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,7 @@ NAME = pipex
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
-MAND_SRCS = main \
-			safe_exit \
-			all \
-			malloc_fd \
-			make_pipe \
-			fork_loop \
-			utils/px_split \
-			utils/px_strlcpy \
-			utils/px_strjoin \
-
-BONUS_SRCS = main \
+SRCS = main \
 			safe_exit \
 			all \
 			malloc_fd \
@@ -38,9 +28,9 @@ BONUS_SRCS = main \
 MAND_OBJS = $(MAND_FIL:.c=.o)
 BONUS_OBJS = $(BONUS_FIL:.c=.o)
 
-MAND_FIL = $(addsuffix .c, $(addprefix mand/, $(MAND_SRCS))) \
+MAND_FIL = $(addsuffix .c, $(addprefix mand/, $(SRCS))) \
 
-BONUS_FIL = $(addsuffix _bonus.c, $(addprefix bonus/, $(MAND_SRCS))) \
+BONUS_FIL = $(addsuffix _bonus.c, $(addprefix bonus/, $(SRCS))) \
 
 
 all : $(NAME)
@@ -56,14 +46,12 @@ clean :
 	$(RM) $(MAND_OBJS) $(BONUS_OBJS)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME)_bonus
 
-bonus: $(BONUS_OBJS)
-	gcc $(CFLAGS) $^ -o $(NAME)
+bonus: $(NAME)_bonus
 
-
-
-
+$(NAME)_bonus: $(BONUS_OBJS)
+	gcc $(CFLAGS) $^ -o $(NAME)_bonus
 
 re: fclean all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heom <heom@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 12:49:27 by heom              #+#    #+#             */
-/*   Updated: 2021/06/16 13:21:48 by heom             ###   ########.fr       */
+/*   Updated: 2021/07/01 13:18:55 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void
 	all()->proc_num = argc - 3;
 	all()->argv = argv;
 	all()->env = env;
-	all()->pid = malloc(sizeof(pid_t) * all()->proc_num);
+	all()->pid = (pid_t *)malloc(sizeof(pid_t) * all()->proc_num);
 	if ((all()->rfd = open(argv[1], O_RDWR, 0664)) == -1)
 		safe_exit(1, "Invalid file1");
 	if ((all()->wfd = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0664)) \
@@ -75,7 +75,7 @@ int
 	all_init(argc, argv, env);
 	malloc_fd();
 	make_pipe();
-	fork_loop(argv);
+	fork_loop();
 	read_file();
 	i = 0;
 	while (i < all()->proc_num)
