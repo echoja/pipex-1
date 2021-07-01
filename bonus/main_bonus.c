@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 12:49:27 by heom              #+#    #+#             */
-/*   Updated: 2021/07/01 13:18:55 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:33:50 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void
 	validate(int argc, char **argv)
 {
 	(void)argv;
-	if (argc < 4)
+	if (argc <= 4)
 		exit_code_msg(1, "Invalid arg");
 }
 

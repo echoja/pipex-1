@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -10,12 +9,15 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 NL='\n'
 
-echo -e $GREEN"TEST START"$NC
-echo -n "making...."
+# echo -e $GREEN"TEST START"$NC
+echo -e $CYAN"Make mandatory part..."$NC
 
-make bonus > /dev/null
+make
 
-echo -e $GREEN"SUCCESS"$NC
+echo -e $GREEN"# Make mandatory part SUCCESS"$NC
+echo -e $CYAN"Make Bonus part..."$NC
+make bonus
+echo -e $GREEN"# Make bonus part SUCCESS"$NC
 
 echo -e "my${NL}name${NL}is${NL}cruella" > test_input
 
@@ -49,5 +51,21 @@ check_diff "3"
 < test_input cat 123 | cat > test_correct_output
 ./pipex test_input "cat 123" cat test_my_output
 check_diff "4"
+
+< test_input cat | cat > test_correct_output
+./pipex_bonus test_input cat cat test_my_output
+check_diff "bonus-1"
+
+< test_input ls -l | wc -l > test_correct_output
+./pipex_bonus test_input "ls -l" "wc -l" test_my_output
+check_diff "bonus-2"
+
+< test_input grep a1 | wc -w > test_correct_output
+./pipex_bonus test_input "grep a1" "wc -w" test_my_output
+check_diff "bonus-3"
+
+< test_input cat 123 | cat > test_correct_output
+./pipex_bonus test_input "cat 123" cat test_my_output
+check_diff "bonus-4"
 
 rm test_input test_correct_output test_my_output
